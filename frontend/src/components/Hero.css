@@ -1,0 +1,96 @@
+.hero{
+  position: relative;
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--ink-900);
+}
+.hero-video{
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: .55;
+}
+.hero-scrim{
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(19,18,16,.55) 0%, rgba(19,18,16,.35) 40%, rgba(19,18,16,.92) 100%);
+}
+.hero-content{
+  position: relative;
+  z-index: 2;
+  color: var(--bone);
+  padding-top: 60px;
+  max-width: 760px;
+}
+.hero-title{
+  font-family: var(--f-display);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: clamp(2.6rem, 6.4vw, 5.2rem);
+  line-height: 0.98;
+  margin: 14px 0 22px;
+  letter-spacing: 0.005em;
+  animation: heroIn .8s var(--ease-out) both;
+}
+.hero-title span{ color: var(--accent); }
+.hero-sub{
+  font-size: 1.02rem;
+  line-height: 1.6;
+  color: rgba(239,235,226,0.78);
+  max-width: 480px;
+  margin-bottom: 34px;
+  animation: heroIn .8s .1s var(--ease-out) both;
+}
+.hero-cta{ display:flex; gap:14px; flex-wrap:wrap; animation: heroIn .8s .2s var(--ease-out) both; }
+
+@keyframes heroIn{
+  from{ opacity:0; transform: translateY(18px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+
+.btn{
+  font-family: var(--f-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 15px 26px;
+  display: inline-block;
+  transition: all .25s var(--ease-out);
+}
+.btn-solid{ background: var(--accent); color: var(--ink-900); font-weight: 600; }
+.btn-solid:hover{ background: var(--bone); }
+.btn-ghost{ border: 1px solid rgba(239,235,226,0.35); color: var(--bone); }
+.btn-ghost:hover{ border-color: var(--accent); color: var(--accent); }
+
+.hero-thumbs{
+  position: absolute;
+  right: clamp(20px,5vw,64px);
+  bottom: 48px;
+  display: flex;
+  gap: 14px;
+  z-index: 2;
+}
+.hero-thumb{
+  width: 92px; height: 64px;
+  border: 1px solid rgba(239,235,226,0.3);
+  color: var(--bone);
+  display:flex; align-items:flex-end; padding: 8px;
+  opacity: 0;
+  animation: thumbIn .6s var(--ease-out) forwards;
+  background: rgba(19,18,16,0.3);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+@keyframes thumbIn{ from{ opacity:0; transform: translateY(10px);} to{ opacity:1; transform: translateY(0);} }
+.hero-thumb-label{
+  font-family: var(--f-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 760px){
+  .hero-thumbs{ display:none; }
+}

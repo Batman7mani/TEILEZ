@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: forge_user
+      POSTGRES_PASSWORD: forge_pass
+      POSTGRES_DB: forge_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - forge_pg_data:/var/lib/postgresql/data
+
+volumes:
+  forge_pg_data:

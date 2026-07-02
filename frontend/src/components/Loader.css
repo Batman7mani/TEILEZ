@@ -1,0 +1,293 @@
+/* ============================================
+   TEILEZ LOADER - AWWWARDS LEVEL
+   ============================================ */
+
+:root {
+    --loader-bg: #0a0a0a;
+    --loader-text: #ffffff;
+    --loader-accent: #ffffff;
+    --ease-smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --ease-out-quart: cubic-bezier(0.165, 0.84, 0.44, 1);
+    --ease-in-out-cubic: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.loader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: var(--loader-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+/* ============================================
+   TEXT WRAPPER - MAINTAINS CENTER POSITION
+   ============================================ */
+
+.loader-text-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    width: 100%;
+    height: auto;
+    z-index: 10;
+    transition: all 1.2s var(--ease-in-out-cubic);
+}
+
+.stage-zoom .loader-text-wrapper {
+    opacity: 0;
+}
+
+/* ============================================
+   LOADER WORDS (TEI & LEZ)
+   ============================================ */
+
+.loader-word {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 12vw, 9rem);
+    font-weight: 900;
+    color: var(--loader-text);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    position: relative;
+    white-space: nowrap;
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 1.2s var(--ease-in-out-cubic);
+}
+
+/* Left Word - TEI */
+.loader-word--left {
+    text-align: right;
+}
+
+.stage-zoom .loader-word--left {
+    opacity: 0;
+    transform: translateX(-150px) scale(0.8);
+}
+
+/* Right Word - LEZ */
+.loader-word--right {
+    text-align: left;
+}
+
+.stage-zoom .loader-word--right {
+    opacity: 0;
+    transform: translateX(150px) scale(0.8);
+}
+
+/* ============================================
+   COUNTERS (00 - 99)
+   ============================================ */
+
+.loader-counter {
+    position: absolute;
+    font-family: 'Courier New', monospace;
+    font-size: clamp(0.8rem, 2vw, 1.2rem);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--loader-accent);
+    opacity: 0.95;
+    font-variant-numeric: tabular-nums;
+    transition: opacity 1.2s var(--ease-in-out-cubic);
+}
+
+.loader-counter--left {
+    bottom: -2.5rem;
+    right: 0;
+}
+
+.loader-counter--right {
+    bottom: -2.5rem;
+    left: 0;
+}
+
+.stage-zoom .loader-counter {
+    opacity: 0;
+}
+
+/* ============================================
+   VIDEO FRAME (CENTER) - LOCKED ZOOM
+   ============================================ */
+
+.loader-video-container {
+    position: relative;
+    z-index: 11;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.loader-frame {
+    position: relative;
+    width: 280px;
+    height: 180px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    transform: scale(1);
+    opacity: 1;
+    transition: none;
+    will-change: width, height;
+}
+
+.loader-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    will-change: transform;
+}
+
+/* ============================================
+   ZOOM STAGE - VIDEO EXPANDS FROM CENTER
+   ============================================ */
+
+.stage-zoom .loader-frame {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    border-radius: 0;
+    box-shadow: none;
+    z-index: 9998;
+    transition: all 1.2s var(--ease-in-out-cubic);
+}
+
+.stage-zoom .loader-video-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100vw;
+    height: 100vh;
+    z-index: 9998;
+}
+
+/* ============================================
+   WIPE TRANSITION - REVEAL CONTENT
+   ============================================ */
+
+.loader-wipe {
+    position: fixed;
+    inset: 0;
+    background: var(--loader-bg);
+    transform: scaleY(0);
+    transform-origin: top;
+    z-index: 9997;
+    transition: transform 0.65s var(--ease-in-out-cubic);
+}
+
+.stage-wipe .loader-wipe {
+    transform: scaleY(1);
+    transform-origin: bottom;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+
+@media (max-width: 1024px) {
+    .loader-text-wrapper {
+        gap: 1.5rem;
+    }
+
+    .loader-word {
+        font-size: clamp(2.5rem, 10vw, 7rem);
+    }
+
+    .loader-frame {
+        width: 240px;
+        height: 150px;
+    }
+
+    .loader-counter--left,
+    .loader-counter--right {
+        bottom: -2rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .loader-text-wrapper {
+        gap: 1rem;
+        flex-direction: column;
+    }
+
+    .loader-word {
+        font-size: clamp(2rem, 9vw, 4.5rem);
+    }
+
+    .loader-frame {
+        width: 200px;
+        height: 130px;
+    }
+
+    .loader-counter--left,
+    .loader-counter--right {
+        bottom: -1.8rem;
+        font-size: 0.8rem;
+    }
+
+    .stage-zoom .loader-word--left {
+        transform: translateX(-60vw) scale(0.8);
+    }
+
+    .stage-zoom .loader-word--right {
+        transform: translateX(60vw) scale(0.8);
+    }
+}
+
+@media (max-width: 480px) {
+    .loader-text-wrapper {
+        gap: 0.8rem;
+    }
+
+    .loader-word {
+        font-size: clamp(1.5rem, 8vw, 2.5rem);
+    }
+
+    .loader-frame {
+        width: 160px;
+        height: 100px;
+    }
+
+    .loader-counter--left,
+    .loader-counter--right {
+        bottom: -1.5rem;
+        font-size: 0.7rem;
+    }
+}
+
+/* ============================================
+   PERFORMANCE OPTIMIZATIONS
+   ============================================ */
+
+.loader-frame,
+.loader-video,
+.loader-word,
+.loader-text-wrapper {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+.stage-zoom .loader-frame {
+    will-change: width, height, transform;
+}

@@ -1,6 +1,8 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 
-export default defineConfig({
+// Production build is served from GitHub Pages at /TEILEZ/; dev stays at /.
+export default defineConfig(({ command }) => ({
   plugins: [react()],
-})
+  base: command === 'build' ? '/TEILEZ/' : '/',
+}))

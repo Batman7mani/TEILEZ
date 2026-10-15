@@ -28,13 +28,13 @@ const TABS = ['Customisation', 'Details', 'Fitment', 'Specific Demand']
 const CARS = {
   aston: {
     label: 'Aston Martin',
-    path: '/models/AstonMartin.glb',
+    path: import.meta.env.BASE_URL + 'models/AstonMartin.glb',
     paintMaterial: 'Body_Color',
     basePrice: 640,
   },
   porsche: {
     label: 'Porsche',
-    path: '/models/Porsche.glb',
+    path: import.meta.env.BASE_URL + 'models/Porsche.glb',
     paintMaterial: 'paint',
     basePrice: 720,
   },

@@ -26,7 +26,7 @@ export default function App(){
 
   return (
     <StoreProvider>
-      <BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
         {loading && <Loader onDone={handleLoaderDone} />}
         <div style={{
           opacity: siteReady ? 1 : 0,

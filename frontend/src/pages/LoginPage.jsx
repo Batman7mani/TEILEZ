@@ -81,7 +81,7 @@ export default function LoginPage(){
       <div className="login-visual">
         <video
           className="login-video"
-          src="/assets/loader-bg.mp4"
+          src={import.meta.env.BASE_URL + "assets/loader-bg.mp4"}
           autoPlay
           muted
           loop
